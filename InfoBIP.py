@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import http.client
@@ -104,7 +103,7 @@ def GetDataFromBaseForSendSMS():
 ############################################################################
 def CreateScenario():
     #Строка авторизации в формате b'ЛОГИН:ПАРОЛЬ'
-    BHash=str(base64.standard_b64encode(b'RU-UD:070618').decode('UTF-8'))
+    BHash=str(base64.standard_b64encode(b'***:***').decode('UTF-8'))
     conn = http.client.HTTPSConnection("api.infobip.com")
 
     payload = """
@@ -148,7 +147,7 @@ def SendByScenario(Phone,TextSMS,TextViber):
     ViberGUID=str(uuid.uuid4()) 
     
     #Строка авторизации в формате b'ЛОГИН:ПАРОЛЬ'
-    BHash=str(base64.standard_b64encode(b'RU-UD:070618').decode('UTF-8'))
+    BHash=str(base64.standard_b64encode(b'***:***').decode('UTF-8'))
     
     #Сервер не любит спецсимволы (кавычки), не отправляет. Режем их.
     #Сценарий - сначала отправляем по Вайберу, затем по СМС
@@ -190,6 +189,7 @@ def SendByScenario(Phone,TextSMS,TextViber):
 
     Query="""
     USE [Logs]
+
 INSERT INTO [dbo].[InfoBIP]
            (
            URL
@@ -204,6 +204,7 @@ INSERT INTO [dbo].[InfoBIP]
            ,'"""+payload+"""'
            ,'"""+data.decode("utf-8")+"""'
            ,GetDate())
+
     """
     MyAPI.ExecSQL(Query)
     return(data.decode("utf-8"))
@@ -217,7 +218,7 @@ def CheckStatus(SendSMSID):
     SMSGGUID=str(uuid.uuid4()) 
     ViberGUID=str(uuid.uuid4()) 
     #Строка авторизации в формате b'ЛОГИН:ПАРОЛЬ'
-    BHash=str(base64.standard_b64encode(b'RU-UD:070618').decode('UTF-8'))
+    BHash=str(base64.standard_b64encode(b'***:***').decode('UTF-8'))
    
     payload = """
     { 
@@ -239,6 +240,7 @@ def CheckStatus(SendSMSID):
 
     Query="""
     USE [Logs]
+
 INSERT INTO [dbo].[InfoBIP]
            (
            URL
@@ -253,6 +255,7 @@ INSERT INTO [dbo].[InfoBIP]
            ,'"""+payload+"""'
            ,'"""+data.decode("utf-8")+"""'
            ,GetDate())
+
     """
     MyAPI.ExecSQL(Query)
     return(data.decode("utf-8"))
@@ -262,7 +265,7 @@ INSERT INTO [dbo].[InfoBIP]
 ############################################################################
 def SendSMS(Phone,Text):
     #Строка авторизации в формате b'ЛОГИН:ПАРОЛЬ'
-    BHash=str(base64.standard_b64encode(b'RU-UD:070618').decode('UTF-8'))
+    BHash=str(base64.standard_b64encode(b'***:***').decode('UTF-8'))
     print (BHash)
     #return 
     conn = http.client.HTTPSConnection("api.infobip.com")
